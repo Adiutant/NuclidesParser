@@ -137,7 +137,7 @@ QVector<QJsonObject> nuclidesVecOut;
             continue;
         nuclidesVecOut.push_back(nuclidesVec[j]);
         }
-     qDebug()<< "Поиск - " << i*100/elementsArray.size() << "%";
+     qDebug()<< "Группировка - " << i*100/elementsArray.size() << "%";
     }
 
     for (auto item : nuclidesVecOut)
