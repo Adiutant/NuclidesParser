@@ -1,0 +1,682 @@
+{
+	"dataroot": {
+		"Element": [
+			{
+				"Element_Id": "1",
+				"Element": "H",
+				"Element_Capt_Rus": "Водород",
+				"Element_Capt_Eng": "Hydrogen"
+			},
+			{
+				"Element_Id": "2",
+				"Element": "He",
+				"Element_Capt_Rus": "Гелий",
+				"Element_Capt_Eng": "Helium"
+			},
+			{
+				"Element_Id": "3",
+				"Element": "Li",
+				"Element_Capt_Rus": "Литий",
+				"Element_Capt_Eng": "Lithium"
+			},
+			{
+				"Element_Id": "4",
+				"Element": "Be",
+				"Element_Capt_Rus": "Бериллий",
+				"Element_Capt_Eng": "Beryllium"
+			},
+			{
+				"Element_Id": "5",
+				"Element": "B",
+				"Element_Capt_Rus": "Бор",
+				"Element_Capt_Eng": "Boron"
+			},
+			{
+				"Element_Id": "6",
+				"Element": "C",
+				"Element_Capt_Rus": "Углерод",
+				"Element_Capt_Eng": "Carbon"
+			},
+			{
+				"Element_Id": "7",
+				"Element": "N",
+				"Element_Capt_Rus": "Азот",
+				"Element_Capt_Eng": "Nitrogen"
+			},
+			{
+				"Element_Id": "8",
+				"Element": "O",
+				"Element_Capt_Rus": "Кислород",
+				"Element_Capt_Eng": "Oxygen"
+			},
+			{
+				"Element_Id": "9",
+				"Element": "F",
+				"Element_Capt_Rus": "Фтор",
+				"Element_Capt_Eng": "Fluorine"
+			},
+			{
+				"Element_Id": "10",
+				"Element": "Ne",
+				"Element_Capt_Rus": "Неон",
+				"Element_Capt_Eng": "Neon"
+			},
+			{
+				"Element_Id": "11",
+				"Element": "Na",
+				"Element_Capt_Rus": "Натрий",
+				"Element_Capt_Eng": "Natrium"
+			},
+			{
+				"Element_Id": "12",
+				"Element": "Mg",
+				"Element_Capt_Rus": "Магний",
+				"Element_Capt_Eng": "Magnesium"
+			},
+			{
+				"Element_Id": "13",
+				"Element": "Al",
+				"Element_Capt_Rus": "Алюминий",
+				"Element_Capt_Eng": "Aluminium"
+			},
+			{
+				"Element_Id": "14",
+				"Element": "Si",
+				"Element_Capt_Rus": "Кремний",
+				"Element_Capt_Eng": "Silicon"
+			},
+			{
+				"Element_Id": "15",
+				"Element": "P",
+				"Element_Capt_Rus": "Фосфор",
+				"Element_Capt_Eng": "Phosphorus"
+			},
+			{
+				"Element_Id": "16",
+				"Element": "S",
+				"Element_Capt_Rus": "Сера",
+				"Element_Capt_Eng": "Sulfur"
+			},
+			{
+				"Element_Id": "17",
+				"Element": "Cl",
+				"Element_Capt_Rus": "Хлор",
+				"Element_Capt_Eng": "Chlorine"
+			},
+			{
+				"Element_Id": "18",
+				"Element": "Ar",
+				"Element_Capt_Rus": "Аргон",
+				"Element_Capt_Eng": "Argon"
+			},
+			{
+				"Element_Id": "19",
+				"Element": "K",
+				"Element_Capt_Rus": "Калий",
+				"Element_Capt_Eng": "Potassium"
+			},
+			{
+				"Element_Id": "20",
+				"Element": "Ca",
+				"Element_Capt_Rus": "Кальций",
+				"Element_Capt_Eng": "Calcium"
+			},
+			{
+				"Element_Id": "21",
+				"Element": "Sc",
+				"Element_Capt_Rus": "Скандий",
+				"Element_Capt_Eng": "Scandium"
+			},
+			{
+				"Element_Id": "22",
+				"Element": "Ti",
+				"Element_Capt_Rus": "Титан",
+				"Element_Capt_Eng": "Titanium"
+			},
+			{
+				"Element_Id": "23",
+				"Element": "V",
+				"Element_Capt_Rus": "Ванадий",
+				"Element_Capt_Eng": "Vanadium"
+			},
+			{
+				"Element_Id": "24",
+				"Element": "Cr",
+				"Element_Capt_Rus": "Хром",
+				"Element_Capt_Eng": "Chromium"
+			},
+			{
+				"Element_Id": "25",
+				"Element": "Mn",
+				"Element_Capt_Rus": "Марганец",
+				"Element_Capt_Eng": "Manganese"
+			},
+			{
+				"Element_Id": "26",
+				"Element": "Fe",
+				"Element_Capt_Rus": "Железо",
+				"Element_Capt_Eng": "Iron"
+			},
+			{
+				"Element_Id": "27",
+				"Element": "Co",
+				"Element_Capt_Rus": "Кобальт",
+				"Element_Capt_Eng": "Cobalt"
+			},
+			{
+				"Element_Id": "28",
+				"Element": "Ni",
+				"Element_Capt_Rus": "Никель",
+				"Element_Capt_Eng": "Nickel"
+			},
+			{
+				"Element_Id": "29",
+				"Element": "Cu",
+				"Element_Capt_Rus": "Медь",
+				"Element_Capt_Eng": "Copper"
+			},
+			{
+				"Element_Id": "30",
+				"Element": "Zn",
+				"Element_Capt_Rus": "Цинк",
+				"Element_Capt_Eng": "Zinc"
+			},
+			{
+				"Element_Id": "31",
+				"Element": "Ga",
+				"Element_Capt_Rus": "Галлий",
+				"Element_Capt_Eng": "Gallium"
+			},
+			{
+				"Element_Id": "32",
+				"Element": "Ge",
+				"Element_Capt_Rus": "Германий",
+				"Element_Capt_Eng": "Germanium"
+			},
+			{
+				"Element_Id": "33",
+				"Element": "As",
+				"Element_Capt_Rus": "Мышьяк",
+				"Element_Capt_Eng": "Arsenic"
+			},
+			{
+				"Element_Id": "34",
+				"Element": "Se",
+				"Element_Capt_Rus": "Селен",
+				"Element_Capt_Eng": "Selenium"
+			},
+			{
+				"Element_Id": "35",
+				"Element": "Br",
+				"Element_Capt_Rus": "Бром",
+				"Element_Capt_Eng": "Bromine"
+			},
+			{
+				"Element_Id": "36",
+				"Element": "Kr",
+				"Element_Capt_Rus": "Криптон",
+				"Element_Capt_Eng": "Krypton"
+			},
+			{
+				"Element_Id": "37",
+				"Element": "Rb",
+				"Element_Capt_Rus": "Рубидий",
+				"Element_Capt_Eng": "Rubidium"
+			},
+			{
+				"Element_Id": "38",
+				"Element": "Sr",
+				"Element_Capt_Rus": "Стронций",
+				"Element_Capt_Eng": "Strontium"
+			},
+			{
+				"Element_Id": "39",
+				"Element": "Y",
+				"Element_Capt_Rus": "Иттрий",
+				"Element_Capt_Eng": "Yttrium"
+			},
+			{
+				"Element_Id": "40",
+				"Element": "Zr",
+				"Element_Capt_Rus": "Цирконий",
+				"Element_Capt_Eng": "Zirconium"
+			},
+			{
+				"Element_Id": "41",
+				"Element": "Nb",
+				"Element_Capt_Rus": "Ниобий",
+				"Element_Capt_Eng": "Niobium"
+			},
+			{
+				"Element_Id": "42",
+				"Element": "Mo",
+				"Element_Capt_Rus": "Молибден",
+				"Element_Capt_Eng": "Molybdenum"
+			},
+			{
+				"Element_Id": "43",
+				"Element": "Tc",
+				"Element_Capt_Rus": "Технеций",
+				"Element_Capt_Eng": "Technetium"
+			},
+			{
+				"Element_Id": "44",
+				"Element": "Ru",
+				"Element_Capt_Rus": "Рутений",
+				"Element_Capt_Eng": "Ruthenium"
+			},
+			{
+				"Element_Id": "45",
+				"Element": "Rh",
+				"Element_Capt_Rus": "Родий",
+				"Element_Capt_Eng": "Rhodium"
+			},
+			{
+				"Element_Id": "46",
+				"Element": "Pd",
+				"Element_Capt_Rus": "Палладий",
+				"Element_Capt_Eng": "Palladium"
+			},
+			{
+				"Element_Id": "47",
+				"Element": "Ag",
+				"Element_Capt_Rus": "Серебро",
+				"Element_Capt_Eng": "Argentum"
+			},
+			{
+				"Element_Id": "48",
+				"Element": "Cd",
+				"Element_Capt_Rus": "Кадмий",
+				"Element_Capt_Eng": "Cadmium"
+			},
+			{
+				"Element_Id": "49",
+				"Element": "In",
+				"Element_Capt_Rus": "Индий",
+				"Element_Capt_Eng": "Indium"
+			},
+			{
+				"Element_Id": "50",
+				"Element": "Sn",
+				"Element_Capt_Rus": "Олово",
+				"Element_Capt_Eng": "Tin"
+			},
+			{
+				"Element_Id": "51",
+				"Element": "Sb",
+				"Element_Capt_Rus": "Сурьма",
+				"Element_Capt_Eng": "Antimony"
+			},
+			{
+				"Element_Id": "52",
+				"Element": "Te",
+				"Element_Capt_Rus": "Теллур",
+				"Element_Capt_Eng": "Tellurium"
+			},
+			{
+				"Element_Id": "53",
+				"Element": "I",
+				"Element_Capt_Rus": "Йод",
+				"Element_Capt_Eng": "Iodine"
+			},
+			{
+				"Element_Id": "54",
+				"Element": "Xe",
+				"Element_Capt_Rus": "Ксенон",
+				"Element_Capt_Eng": "Xenon"
+			},
+			{
+				"Element_Id": "55",
+				"Element": "Cs",
+				"Element_Capt_Rus": "Цезий",
+				"Element_Capt_Eng": "Caesium"
+			},
+			{
+				"Element_Id": "56",
+				"Element": "Ba",
+				"Element_Capt_Rus": "Барий",
+				"Element_Capt_Eng": "Barium"
+			},
+			{
+				"Element_Id": "57",
+				"Element": "La",
+				"Element_Capt_Rus": "Лантан",
+				"Element_Capt_Eng": "Lanthanum"
+			},
+			{
+				"Element_Id": "58",
+				"Element": "Ce",
+				"Element_Capt_Rus": "Церий",
+				"Element_Capt_Eng": "Cerium"
+			},
+			{
+				"Element_Id": "59",
+				"Element": "Pr",
+				"Element_Capt_Rus": "Празеодим",
+				"Element_Capt_Eng": "Praseodymium"
+			},
+			{
+				"Element_Id": "60",
+				"Element": "Nd",
+				"Element_Capt_Rus": "Неодим",
+				"Element_Capt_Eng": "Neodymium"
+			},
+			{
+				"Element_Id": "61",
+				"Element": "Pm",
+				"Element_Capt_Rus": "Прометий",
+				"Element_Capt_Eng": "Promethium"
+			},
+			{
+				"Element_Id": "62",
+				"Element": "Sm",
+				"Element_Capt_Rus": "Самарий",
+				"Element_Capt_Eng": "Samarium"
+			},
+			{
+				"Element_Id": "63",
+				"Element": "Eu",
+				"Element_Capt_Rus": "Европий",
+				"Element_Capt_Eng": "Europium"
+			},
+			{
+				"Element_Id": "64",
+				"Element": "Gd",
+				"Element_Capt_Rus": "Гадолиний",
+				"Element_Capt_Eng": "Gadolinium"
+			},
+			{
+				"Element_Id": "65",
+				"Element": "Tb",
+				"Element_Capt_Rus": "Тербий",
+				"Element_Capt_Eng": "Terbium"
+			},
+			{
+				"Element_Id": "66",
+				"Element": "Dy",
+				"Element_Capt_Rus": "Диспрозий",
+				"Element_Capt_Eng": "Dysprosium"
+			},
+			{
+				"Element_Id": "67",
+				"Element": "Ho",
+				"Element_Capt_Rus": "Гольмий",
+				"Element_Capt_Eng": "Holmium"
+			},
+			{
+				"Element_Id": "68",
+				"Element": "Er",
+				"Element_Capt_Rus": "Эрбий",
+				"Element_Capt_Eng": "Erbium"
+			},
+			{
+				"Element_Id": "69",
+				"Element": "Tm",
+				"Element_Capt_Rus": "Тулий",
+				"Element_Capt_Eng": "Thulium"
+			},
+			{
+				"Element_Id": "70",
+				"Element": "Yb",
+				"Element_Capt_Rus": "Иттербий",
+				"Element_Capt_Eng": "Ytterbium"
+			},
+			{
+				"Element_Id": "71",
+				"Element": "Lu",
+				"Element_Capt_Rus": "Лютеций",
+				"Element_Capt_Eng": "Lutecium"
+			},
+			{
+				"Element_Id": "72",
+				"Element": "Hf",
+				"Element_Capt_Rus": "Гафний",
+				"Element_Capt_Eng": "Hafnium"
+			},
+			{
+				"Element_Id": "73",
+				"Element": "Ta",
+				"Element_Capt_Rus": "Тантал",
+				"Element_Capt_Eng": "Tantalum"
+			},
+			{
+				"Element_Id": "74",
+				"Element": "W",
+				"Element_Capt_Rus": "Вольфрам",
+				"Element_Capt_Eng": "Tungsten"
+			},
+			{
+				"Element_Id": "75",
+				"Element": "Re",
+				"Element_Capt_Rus": "Рений",
+				"Element_Capt_Eng": "Rhenium"
+			},
+			{
+				"Element_Id": "76",
+				"Element": "Os",
+				"Element_Capt_Rus": "Осмий",
+				"Element_Capt_Eng": "Osmium"
+			},
+			{
+				"Element_Id": "77",
+				"Element": "Ir",
+				"Element_Capt_Rus": "Иридий",
+				"Element_Capt_Eng": "Iridium"
+			},
+			{
+				"Element_Id": "78",
+				"Element": "Pt",
+				"Element_Capt_Rus": "Платина",
+				"Element_Capt_Eng": "Platinum"
+			},
+			{
+				"Element_Id": "79",
+				"Element": "Au",
+				"Element_Capt_Rus": "Золото",
+				"Element_Capt_Eng": "Aurum"
+			},
+			{
+				"Element_Id": "80",
+				"Element": "Hg",
+				"Element_Capt_Rus": "Ртуть",
+				"Element_Capt_Eng": "Mercury"
+			},
+			{
+				"Element_Id": "81",
+				"Element": "Tl",
+				"Element_Capt_Rus": "Таллий",
+				"Element_Capt_Eng": "Thallium"
+			},
+			{
+				"Element_Id": "82",
+				"Element": "Pb",
+				"Element_Capt_Rus": "Свинец",
+				"Element_Capt_Eng": "Plumbum"
+			},
+			{
+				"Element_Id": "83",
+				"Element": "Bi",
+				"Element_Capt_Rus": "Висмут",
+				"Element_Capt_Eng": "Bismuth"
+			},
+			{
+				"Element_Id": "84",
+				"Element": "Po",
+				"Element_Capt_Rus": "Полоний",
+				"Element_Capt_Eng": "Polonium"
+			},
+			{
+				"Element_Id": "85",
+				"Element": "At",
+				"Element_Capt_Rus": "Астат",
+				"Element_Capt_Eng": "Astatine"
+			},
+			{
+				"Element_Id": "86",
+				"Element": "Rn",
+				"Element_Capt_Rus": "Радон",
+				"Element_Capt_Eng": "Radon"
+			},
+			{
+				"Element_Id": "87",
+				"Element": "Fr",
+				"Element_Capt_Rus": "Франций",
+				"Element_Capt_Eng": "Francium"
+			},
+			{
+				"Element_Id": "88",
+				"Element": "Ra",
+				"Element_Capt_Rus": "Радий",
+				"Element_Capt_Eng": "Radium"
+			},
+			{
+				"Element_Id": "89",
+				"Element": "Ac",
+				"Element_Capt_Rus": "Актиний",
+				"Element_Capt_Eng": "Actinium"
+			},
+			{
+				"Element_Id": "90",
+				"Element": "Th",
+				"Element_Capt_Rus": "Торий",
+				"Element_Capt_Eng": "Thorium"
+			},
+			{
+				"Element_Id": "91",
+				"Element": "Pa",
+				"Element_Capt_Rus": "Протактиний",
+				"Element_Capt_Eng": "Protactinium"
+			},
+			{
+				"Element_Id": "92",
+				"Element": "U",
+				"Element_Capt_Rus": "Уран",
+				"Element_Capt_Eng": "Uranium"
+			},
+			{
+				"Element_Id": "93",
+				"Element": "Np",
+				"Element_Capt_Rus": "Нептуний",
+				"Element_Capt_Eng": "Neptunium"
+			},
+			{
+				"Element_Id": "94",
+				"Element": "Pu",
+				"Element_Capt_Rus": "Плутоний",
+				"Element_Capt_Eng": "Plutonium"
+			},
+			{
+				"Element_Id": "95",
+				"Element": "Am",
+				"Element_Capt_Rus": "Америций",
+				"Element_Capt_Eng": "Americium"
+			},
+			{
+				"Element_Id": "96",
+				"Element": "Cm",
+				"Element_Capt_Rus": "Кюрий",
+				"Element_Capt_Eng": "Curium"
+			},
+			{
+				"Element_Id": "97",
+				"Element": "Bk",
+				"Element_Capt_Rus": "Беркелий",
+				"Element_Capt_Eng": "Berkelium"
+			},
+			{
+				"Element_Id": "98",
+				"Element": "Cf",
+				"Element_Capt_Rus": "Калифорний",
+				"Element_Capt_Eng": "Californium"
+			},
+			{
+				"Element_Id": "99",
+				"Element": "Es",
+				"Element_Capt_Rus": "Эйнштейний",
+				"Element_Capt_Eng": "Einsteinium"
+			},
+			{
+				"Element_Id": "100",
+				"Element": "Fm",
+				"Element_Capt_Rus": "Фермий",
+				"Element_Capt_Eng": "Fermium"
+			},
+			{
+				"Element_Id": "101",
+				"Element": "Md",
+				"Element_Capt_Rus": "Менделевий",
+				"Element_Capt_Eng": "Mendelevium"
+			},
+			{
+				"Element_Id": "102",
+				"Element": "No",
+				"Element_Capt_Rus": "Нобелий",
+				"Element_Capt_Eng": "Nobelium"
+			},
+			{
+				"Element_Id": "103",
+				"Element": "Lr",
+				"Element_Capt_Rus": "Лоуренсий",
+				"Element_Capt_Eng": "Lawrencium"
+			},
+			{
+				"Element_Id": "104",
+				"Element": "Rf",
+				"Element_Capt_Rus": "Резерфордий",
+				"Element_Capt_Eng": "Rutherfordium"
+			},
+			{
+				"Element_Id": "105",
+				"Element": "Db",
+				"Element_Capt_Rus": "Дубний",
+				"Element_Capt_Eng": "Dubnium"
+			},
+			{
+				"Element_Id": "106",
+				"Element": "Sg",
+				"Element_Capt_Rus": "Сиборгий",
+				"Element_Capt_Eng": "Seaborgium"
+			},
+			{
+				"Element_Id": "107",
+				"Element": "Bh",
+				"Element_Capt_Rus": "Борий",
+				"Element_Capt_Eng": "Bohrium"
+			},
+			{
+				"Element_Id": "108",
+				"Element": "Hs",
+				"Element_Capt_Rus": "Хассий",
+				"Element_Capt_Eng": "Hassium"
+			},
+			{
+				"Element_Id": "109",
+				"Element": "Mt",
+				"Element_Capt_Rus": "Мейтнерий",
+				"Element_Capt_Eng": "Meitnerium"
+			},
+			{
+				"Element_Id": "110",
+				"Element": "Ds",
+				"Element_Capt_Rus": "Дармштадтий",
+				"Element_Capt_Eng": "Darmstadtium"
+			},
+			{
+				"Element_Id": "111",
+				"Element": "Rg",
+				"Element_Capt_Rus": "Рентгений",
+				"Element_Capt_Eng": "Roentgenium"
+			},
+			{
+				"Element_Id": "112",
+				"Element": "Cn",
+				"Element_Capt_Rus": "Коперниций",
+				"Element_Capt_Eng": "Copernicium"
+			}
+		],
+		"_xmlns:od": "urn:schemas-microsoft-com:officedata",
+		"_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+		"_xsi:noNamespaceSchemaLocation": "Element.xsd",
+		"_generated": "2022-04-28T11:02:11"
+	}
+}
