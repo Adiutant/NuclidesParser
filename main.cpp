@@ -4,7 +4,16 @@
 #include <QJsonArray>
 #include <QFile>
 #include <QIODevice>
+#include <QLocale>
+#include <algorithm>
+#include <functional>
+using namespace std;
 
+struct Nuclide
+{
+    QJsonObject nuclideInfo;
+    QStringList lines;
+};
 
 static QJsonObject findRefInJsonArray(QJsonArray array, QString refName, int refValue )
 {
@@ -17,35 +26,83 @@ static QJsonObject findRefInJsonArray(QJsonArray array, QString refName, int ref
     }
     return QJsonObject{};
 }
+static QStringList makeLinesList(QJsonArray allLines, int nuclideNum ,QJsonArray decays){
+    QStringList lines;
+    auto compare = [&nuclideNum](const QJsonValue &val)
+    {
+        return val.toObject()["Nuclides_Num"].toInt() == nuclideNum;
+    };
+    for(auto founder = find_if(allLines.begin(),allLines.end(),compare); founder!=allLines.end();founder  = find_if(allLines.begin(),allLines.end(),compare))
+    {
+        if (founder == allLines.end())
+            break;
 
+//    for (int i = 0; i < allLines.size(); i++)
+//    {
+//        qDebug() << "Поиск линий - " << i*100/allLines.size() << "%" << i;
+        QJsonObject currentLine = founder->toObject();
+//        if (currentLine["Nuclides_Num"].toInt() != nuclideNum )
+//            continue;
+//        QJsonObject currentDecay = findRefInJsonArray(decays,"Decays_Num",currentLine["Decays_Num"].toInt());
+        QString currentLineString = QString("%1 %2 %3 %4");
+        currentLineString.arg(QString::number(currentLine["Energy"].toDouble() *1000),QString::number(currentLine["DEnergy"].toDouble() *1000),
+                QString::number(currentLine["I"].toDouble() /100),QString::number(currentLine["DI"].toDouble() / 100));
+        lines.append(currentLineString);
+        allLines.erase(founder);
+
+
+//    }
+    }
+    return lines;
+}
+inline void swap(QJsonValueRef v1, QJsonValueRef v2)
+{
+    QJsonValue temp(v1);
+    v1 = QJsonValue(v2);
+    v2 = temp;
+}
 int main(int argc, char *argv[])
 {
     QVector<QJsonObject> nuclidesVec;
-QVector<QJsonObject> nuclidesVecOut;
+QVector<Nuclide> nuclidesVecOut;
 
     QCoreApplication a(argc, argv);
     QJsonDocument docNuclides;
     QJsonDocument docDecays;
     QJsonDocument docElements;
+    QJsonDocument docLines;
+    QMap<int,QJsonObject> efficientLines;
     QFile nuclides("Nuclides.json");
     QFile decays("Decays.json");
     QFile output("master.mlib");
     QFile elements("Elements.json");
-    if (!nuclides.open(QIODevice::ReadOnly) || !elements.open(QIODevice::ReadOnly) || !decays.open(QIODevice::ReadOnly) || !output.open(QIODevice::ReadWrite))
+    QFile lines("Lines.json");
+    if (!nuclides.open(QIODevice::ReadOnly) || !elements.open(QIODevice::ReadOnly) ||
+            !decays.open(QIODevice::ReadOnly) || !output.open(QIODevice::ReadWrite)|| !lines.open(QIODevice::ReadOnly) )
         return 12;
+    docLines = QJsonDocument::fromJson(lines.readAll());
     docElements = QJsonDocument::fromJson(elements.readAll());
     docNuclides =  QJsonDocument::fromJson(nuclides.readAll());
     docDecays = QJsonDocument::fromJson(decays.readAll());
+    QJsonObject linesRoot   = docLines.object()["dataroot"].toObject();
     QJsonObject elementsRoot = docElements.object()["dataroot"].toObject();
     QJsonArray elementsArray = elementsRoot["Element"].toArray();
     QJsonObject decaysRoot =  docDecays.object()["dataroot"].toObject();
     QJsonArray decaysArray = decaysRoot["Decays"].toArray();
     QJsonObject nuclidesRoot = docNuclides.object()["dataroot"].toObject();
     QJsonArray nuclidesArray =  nuclidesRoot["Nuclides"].toArray();
+    QJsonArray linesArray = linesRoot["Lines"].toArray();
     nuclides.close();
     decays.close();
+    elements.close();
+    lines.close();
 
-
+//    sort(linesArray.begin(),linesArray.end(),[] (const QJsonValue a,const  QJsonValue b)
+//    {
+//        QJsonObject aO = a.toObject();
+//        QJsonObject bO = b.toObject();
+//        return aO["Nuclides_Num"].toInt() > bO["Nuclides_Num"].toInt();
+//    });
 
     for (int i = 0 ; i<nuclidesArray.size(); i++)
     {
@@ -56,7 +113,7 @@ QVector<QJsonObject> nuclidesVecOut;
 
         //QJsonObject childNuclide = findRefInJsonArray(nuclidesArray,"Nuclides_Num",currentDecay["Child_Num"].toInt());
         int tsec = parentNuclide["T_sec"].toInt();
-        if (tsec ==1.79769313486231e+308)
+        if (tsec >3000000)
         {
             tsec = 0;
 
@@ -133,24 +190,47 @@ QVector<QJsonObject> nuclidesVecOut;
     {
         for (int j = 0 ; j<nuclidesVec.size();j++)
         {
-        if (elementsArray[i].toObject()["Element"].toString() != nuclidesVec[j]["Name"].toString())
-            continue;
-        nuclidesVecOut.push_back(nuclidesVec[j]);
+
+
+
+
+            if (elementsArray[i].toObject()["Element"].toString() == nuclidesVec[j]["Name"].toString())
+                nuclidesVecOut.push_back({nuclidesVec[j],QStringList{}});
         }
      qDebug()<< "Группировка - " << i*100/elementsArray.size() << "%";
     }
+    for(int i = 0; i < nuclidesVecOut.size();i++)
+    {
+        QStringList lines;
+        lines= makeLinesList(linesArray,nuclidesVecOut[i].nuclideInfo["Nuclides_Num"].toInt(),decaysArray);
+        nuclidesVecOut[i].lines = lines;
+        qDebug() << "Поиск линий - " << i*100/nuclidesVecOut.size() << "%" ;
+    }
+
 
     for (auto item : nuclidesVecOut)
     {
-        int tsec = item["T_sec"].toInt();
-        if (tsec ==1.79769313486231e+308)
+        double tsec = item.nuclideInfo["T_sec"].toDouble();
+        if (tsec == 1.79769313486231e+308)
         {
             tsec = 0;
 
         }
-        output.write((QString::number(item["A"].toInt()) + " " +  QString::number(item["Z"].toInt())  + " " +
-            item["Full_Name"].toString() + " " + QString::number(item["AtomicMass"].toInt())+" "
-           + QString::number(tsec)+ " " + QString::number(item["DT_Plus"].toInt()) + "\n").toUtf8() );
+
+
+
+
+
+        QString decayModeStr;
+        decayModeStr.append(" [");
+
+        output.write((QString::number(item.nuclideInfo["A"].toDouble()) + " " +  QString::number(item.nuclideInfo["Z"].toDouble())  + " " +
+            item.nuclideInfo["Full_Name"].toString() + " " + QString::number(item.nuclideInfo["AtomicMass"].toDouble())+" "
+           + QString::number(tsec)+ " " + QString::number(item.nuclideInfo["DT_Plus"].toDouble()) + " " + QString::number(item.lines.size()) + "\n").toUtf8());
+        for (auto line : item.lines)
+        {
+            output.write((line+"\n").toUtf8());
+        }
     }
 
     output.close();
