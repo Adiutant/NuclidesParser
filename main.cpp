@@ -7,12 +7,16 @@
 #include <QLocale>
 #include <algorithm>
 #include <functional>
+#include <QThread>
 using namespace std;
 
 struct Nuclide
 {
     QJsonObject nuclideInfo;
-    QStringList lines;
+    QStringList *lines;
+    QStringList *decays;
+    QStringList *childs;
+    QStringList *parents;
 };
 
 static QJsonObject findRefInJsonArray(QJsonArray array, QString refName, int refValue )
@@ -26,8 +30,8 @@ static QJsonObject findRefInJsonArray(QJsonArray array, QString refName, int ref
     }
     return QJsonObject{};
 }
-static QStringList makeLinesList(QJsonArray allLines, int nuclideNum ,QJsonArray decays){
-    QStringList lines;
+static QStringList* makeLinesList(QJsonArray &allLines, int nuclideNum ,QJsonArray decays){
+    QStringList* lines = new QStringList();
     auto compare = [&nuclideNum](const QJsonValue &val)
     {
         return val.toObject()["Nuclides_Num"].toInt() == nuclideNum;
@@ -36,24 +40,87 @@ static QStringList makeLinesList(QJsonArray allLines, int nuclideNum ,QJsonArray
     {
         if (founder == allLines.end())
             break;
-
-//    for (int i = 0; i < allLines.size(); i++)
-//    {
-//        qDebug() << "Поиск линий - " << i*100/allLines.size() << "%" << i;
         QJsonObject currentLine = founder->toObject();
-//        if (currentLine["Nuclides_Num"].toInt() != nuclideNum )
-//            continue;
-//        QJsonObject currentDecay = findRefInJsonArray(decays,"Decays_Num",currentLine["Decays_Num"].toInt());
-        QString currentLineString = QString("%1 %2 %3 %4");
-        currentLineString.arg(QString::number(currentLine["Energy"].toDouble() *1000),QString::number(currentLine["DEnergy"].toDouble() *1000),
+        if (currentLine["Energy"].toDouble()<=0)
+        {
+            allLines.erase(founder);
+            continue;
+        }
+        QString currentLineString = QString("%1 %2 %3 %4").arg(QString::number(currentLine["Energy"].toDouble() *1000),QString::number(currentLine["DEnergy"].toDouble() *1000),
                 QString::number(currentLine["I"].toDouble() /100),QString::number(currentLine["DI"].toDouble() / 100));
-        lines.append(currentLineString);
+        lines->append(currentLineString);
         allLines.erase(founder);
 
-
-//    }
     }
+    qDebug() <<1;
     return lines;
+}
+static QStringList* makeDecaysList(QJsonArray &allDecays, int nuclideNum){
+    QStringList* decays = new QStringList();
+    auto compare = [&nuclideNum](const QJsonValue &val)
+    {
+        return val.toObject()["Nuclides_Num"].toInt() == nuclideNum;
+    };
+    for(auto founder = find_if(allDecays.begin(),allDecays.end(),compare); founder!=allDecays.end();founder  = find_if(allDecays.begin(),allDecays.end(),compare))
+    {
+        if (founder == allDecays.end())
+            break;
+        QJsonObject currentDecay = founder->toObject();
+        if (currentDecay["Energy"].toDouble()<=0)
+        {
+            allDecays.erase(founder);
+            continue;
+        }
+        QString currentDecayString = QString("%1|%2").arg(currentDecay["Decay_Mode"].toString(), QString::number(currentDecay["Decay_Branch"].toDouble()));
+        decays->append(currentDecayString);
+        //allDecays.erase(founder);
+    }
+    return decays;
+}
+static QStringList* makeChildsList(QJsonArray &allDecays, int nuclideNum){
+    QStringList* childs = new QStringList();
+    auto compare = [&nuclideNum](const QJsonValue &val)
+    {
+        return val.toObject()["Nuclides_Num"].toInt() == nuclideNum;
+    };
+    for(auto founder = find_if(allDecays.begin(),allDecays.end(),compare); founder!=allDecays.end();founder  = find_if(allDecays.begin(),allDecays.end(),compare))
+    {
+        if (founder == allDecays.end())
+            break;
+        QJsonObject currentDecay = founder->toObject();
+        if (currentDecay["Energy"].toDouble()<=0)
+        {
+            allDecays.erase(founder);
+            continue;
+        }
+        QString currentDecayString = QString("%1|%2|%3").arg(currentDecay["Decay_Mode"].toString() ,
+                QString::number(currentDecay["Decay_Branch"].toDouble()),QString::number(currentDecay["Child_Num"].toDouble()));
+        childs->append(currentDecayString);
+        //allDecays.erase(founder);
+    }
+    return childs;
+}
+static QStringList* makeParentsList(QJsonArray &allDecays, int nuclideNum){
+    QStringList* parents= new QStringList();
+    auto compare = [&nuclideNum](const QJsonValue &val)
+    {
+        return val.toObject()["Child_Num"].toInt() == nuclideNum;
+    };
+    for(auto founder = find_if(allDecays.begin(),allDecays.end(),compare); founder!=allDecays.end();founder  = find_if(allDecays.begin(),allDecays.end(),compare))
+    {
+        if (founder == allDecays.end())
+            break;
+        QJsonObject currentDecay = founder->toObject();
+        if (currentDecay["Energy"].toDouble()<=0)
+        {
+            allDecays.erase(founder);
+            continue;
+        }
+        QString currentDecayString = QString("%1").arg(QString::number(currentDecay["Nuclides_Num"].toInt()));
+        parents->append(currentDecayString);
+       // allDecays.erase(founder);
+    }
+    return parents;
 }
 inline void swap(QJsonValueRef v1, QJsonValueRef v2)
 {
@@ -195,19 +262,61 @@ QVector<Nuclide> nuclidesVecOut;
 
 
             if (elementsArray[i].toObject()["Element"].toString() == nuclidesVec[j]["Name"].toString())
-                nuclidesVecOut.push_back({nuclidesVec[j],QStringList{}});
+            {
+
+                nuclidesVecOut.push_back({nuclidesVec[j]});
+            }
         }
      qDebug()<< "Группировка - " << i*100/elementsArray.size() << "%";
     }
     for(int i = 0; i < nuclidesVecOut.size();i++)
     {
-        QStringList lines;
-        lines= makeLinesList(linesArray,nuclidesVecOut[i].nuclideInfo["Nuclides_Num"].toInt(),decaysArray);
+        QStringList* lines = new QStringList();
+        QStringList* decays= new QStringList();
+        QStringList* childs= new QStringList();
+        QStringList* parents= new QStringList();
+        QThread* linesCount = QThread::create([&lines, &linesArray,&nuclidesVecOut,i,decaysArray](){
+            lines= makeLinesList(linesArray,nuclidesVecOut[i].nuclideInfo["Nuclides_Num"].toInt(),decaysArray);
+                          });
+        QThread* decaysCount= QThread::create([&decaysArray,&nuclidesVecOut,i,&decays](){
+            decays = makeDecaysList(decaysArray,nuclidesVecOut[i].nuclideInfo["Nuclides_Num"].toInt());
+                          });
+        QThread*  childsCount= QThread::create([&decaysArray,&nuclidesVecOut,i,&childs](){
+            childs = makeChildsList(decaysArray,nuclidesVecOut[i].nuclideInfo["Nuclides_Num"].toInt());
+                          });
+        QThread* parentsCount= QThread::create([&decaysArray,&nuclidesVecOut,i,&parents](){
+            parents = makeParentsList(decaysArray,nuclidesVecOut[i].nuclideInfo["Nuclides_Num"].toInt());
+                          });
+
+
+         linesCount->start();
+         decaysCount->start();
+         childsCount->start();
+         parentsCount->start();
+
+         while(!(linesCount->isFinished() &&  decaysCount->isFinished() && childsCount->isFinished() && parentsCount->isFinished()))
+         {
+
+         }
+//         delete linesCount;
+//         delete decaysCount;
+//         delete childsCount;
+//         delete parentsCount;
         nuclidesVecOut[i].lines = lines;
+        nuclidesVecOut[i].decays = decays;
+        nuclidesVecOut[i].childs = childs;
+        nuclidesVecOut[i].parents = parents;
+//        delete lines;
+
+//        delete decays;
+//        delete childs;
+//        delete parents;
         qDebug() << "Поиск линий - " << i*100/nuclidesVecOut.size() << "%" ;
     }
 
 
+
+    int index =0;
     for (auto item : nuclidesVecOut)
     {
         double tsec = item.nuclideInfo["T_sec"].toDouble();
@@ -217,20 +326,48 @@ QVector<Nuclide> nuclidesVecOut;
 
         }
 
-
-
-
-
         QString decayModeStr;
         decayModeStr.append(" [");
+       for (auto decay: *item.decays)
+       {
+           if (decay != item.decays->first())
+                decayModeStr.append("%");
+           decayModeStr.append(decay);
+
+       }
+       decayModeStr.append("]");
+
+       QString childsModeStr;
+       childsModeStr.append(" [");
+      for (auto child: *item.childs)
+      {
+          if (child != item.childs->first())
+               childsModeStr.append("%");
+          childsModeStr.append(child);
+
+      }
+      childsModeStr.append("]");
+
+      QString parentsModeStr;
+      parentsModeStr.append(" [");
+     for (auto parent: *item.parents)
+     {
+         if (parent != item.parents->first())
+              parentsModeStr.append("%");
+         parentsModeStr.append(parent);
+
+     }
+     parentsModeStr.append("] ");
 
         output.write((QString::number(item.nuclideInfo["A"].toDouble()) + " " +  QString::number(item.nuclideInfo["Z"].toDouble())  + " " +
             item.nuclideInfo["Full_Name"].toString() + " " + QString::number(item.nuclideInfo["AtomicMass"].toDouble())+" "
-           + QString::number(tsec)+ " " + QString::number(item.nuclideInfo["DT_Plus"].toDouble()) + " " + QString::number(item.lines.size()) + "\n").toUtf8());
-        for (auto line : item.lines)
+           + QString::number(tsec)+ " " + QString::number(item.nuclideInfo["DT_Plus"].toDouble()) + " " + QString::number(item.lines->size())
+                + decayModeStr + childsModeStr + parentsModeStr + QString::number(index) + "\n").toUtf8());
+        for (auto line : *item.lines)
         {
             output.write((line+"\n").toUtf8());
         }
+        index++;
     }
 
     output.close();
